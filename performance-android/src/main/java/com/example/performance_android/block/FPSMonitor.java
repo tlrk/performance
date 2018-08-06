@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.view.Choreographer;
 
+import com.example.performance_android.utils.LogUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -79,6 +81,9 @@ public class FPSMonitor {
             if (TimeUnit.NANOSECONDS.toMillis((frameTimeNanos - mLastTimeNanos)) >= 1000) {
                 // 如果时间已经过去了1S，则计算帧率
                 FPS = Math.min(60, mClockFrame);
+                LogUtils.logD("pre : " + LogUtils.TIME_FORMATTER.format(mLastTimeNanos)
+                        + " cur : " + LogUtils.TIME_FORMATTER.format(frameTimeNanos)
+                        + " fps = " + FPS);
                 if (mFPSMonitorListener != null) {
                     mFPSMonitorListener.onBlock(mLastTimeNanos, frameTimeNanos, FPS);
                 }
