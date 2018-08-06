@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/performance.iml" filepath="$PROJECT_DIR$/performance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/performance-android/performance-android.iml" filepath="$PROJECT_DIR$/performance-android/performance-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/performance-android-no-op/performance-android-noop.iml" filepath="$PROJECT_DIR$/performance-android-no-op/performance-android-noop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/app.iml" filepath="$PROJECT_DIR$/sample/app.iml" />
     </modules>
   </component>
 </project>
