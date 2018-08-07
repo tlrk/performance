@@ -19,6 +19,7 @@ import android.util.Log;
 
 
 import com.example.performance_android.model.BlockInfo;
+import com.example.performance_android.utils.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -30,7 +31,7 @@ import java.util.Map;
 /**
  * Dumps cpu usage.
  */
-class CpuSampler extends AbstractSampler {
+public class CpuSampler extends AbstractSampler {
 
     private static final String TAG = "CpuSampler";
     private static final int BUFFER_SIZE = 1000;
@@ -50,8 +51,8 @@ class CpuSampler extends AbstractSampler {
     private long mTotalLast = 0;
     private long mAppCpuTimeLast = 0;
 
-    public CpuSampler(long sampleInterval) {
-        super(sampleInterval);
+    public CpuSampler(long sampleInterval, long sampleDelay) {
+        super(sampleInterval, sampleDelay);
         BUSY_TIME = (int) (mSampleInterval * 1.2f);
     }
 
@@ -203,6 +204,8 @@ class CpuSampler extends AbstractSampler {
                         break;
                     }
                 }
+
+                LogUtils.logD("cpu --> " + stringBuilder.toString());
             }
         }
         mUserLast = user;

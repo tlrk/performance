@@ -1,9 +1,11 @@
-package com.example.performance_android.block;
+package com.example.performance_android.core;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.view.Choreographer;
 
+import com.example.performance_android.HandlerThreadFactory;
+import com.example.performance_android.PerformanceMonitor;
 import com.example.performance_android.utils.LogUtils;
 
 import java.lang.ref.WeakReference;
@@ -70,7 +72,11 @@ public class FPSMonitor {
         FPS = 0;
     }
 
-    private void onSync(long frameTimeNanos) {
+    private void onSync(final long frameTimeNanos) {
+
+        if (mFPSMonitorListener != null) {
+            mFPSMonitorListener.onStartMonitor();
+        }
         if (mLastTimeNanos == 0) {
             // 检测器启动后，第一帧跳过
             mLastTimeNanos = frameTimeNanos;
@@ -82,15 +88,20 @@ public class FPSMonitor {
                 // 如果时间已经过去了1S，则计算帧率
                 FPS = Math.min(60, mClockFrame);
                 LogUtils.logD("pre : " + LogUtils.TIME_FORMATTER.format(mLastTimeNanos)
-                        + " cur : " + LogUtils.TIME_FORMATTER.format(frameTimeNanos)
-                        + " fps = " + FPS);
-                if (mFPSMonitorListener != null) {
-                    mFPSMonitorListener.onBlock(mLastTimeNanos, frameTimeNanos, FPS);
+                + " cur : " + LogUtils.TIME_FORMATTER.format(frameTimeNanos)
+                + " fps = "  + FPS);
+                if (PerformanceMonitor.getConfiguration() != null
+                        && FPS < PerformanceMonitor.getConfiguration().provideFpsThreshold()) {
+                    dispatchBlockEvent(mLastTimeNanos, frameTimeNanos, FPS);
                 }
                 mLastTimeNanos = frameTimeNanos;
                 mClockFrame = 0;
             }
         }
+
+//        if (mFPSMonitorListener != null) {
+//            mFPSMonitorListener.onEndMonitor();
+//        }
 
         scheduleNextVSync();
     }
@@ -102,6 +113,17 @@ public class FPSMonitor {
         Choreographer.getInstance().postFrameCallback(mFrameCallback);
     }
 
+    private void dispatchBlockEvent(final long previousTime, final long curTime, final int fps) {
+        HandlerThreadFactory.getWriteLogThreadHandler().post(new Runnable() {
+            @Override
+            public void run() {
+
+                if (mFPSMonitorListener != null) {
+                    mFPSMonitorListener.onBlock(previousTime, curTime, fps);
+                }
+            }
+        });
+    }
 
     /**
      * 垂直同步信号回调

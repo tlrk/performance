@@ -2,6 +2,7 @@ package com.example.performance_android.sample;
 
 
 import com.example.performance_android.model.BlockInfo;
+import com.example.performance_android.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,7 +10,7 @@ import java.util.LinkedHashMap;
 /**
  * Dumps thread stack.
  */
-class StackSampler extends AbstractSampler {
+public class StackSampler extends AbstractSampler {
 
     private static final int DEFAULT_MAX_ENTRY_COUNT = 100;
     private static final LinkedHashMap<Long, String> sStackMap = new LinkedHashMap<>();
@@ -17,12 +18,12 @@ class StackSampler extends AbstractSampler {
     private int mMaxEntryCount = DEFAULT_MAX_ENTRY_COUNT;
     private Thread mCurrentThread;
 
-    public StackSampler(Thread thread, long sampleIntervalMillis) {
-        this(thread, DEFAULT_MAX_ENTRY_COUNT, sampleIntervalMillis);
+    public StackSampler(Thread thread, long sampleIntervalMillis, long sampleDelayMillis) {
+        this(thread, DEFAULT_MAX_ENTRY_COUNT, sampleIntervalMillis, sampleDelayMillis);
     }
 
-    public StackSampler(Thread thread, int maxEntryCount, long sampleIntervalMillis) {
-        super(sampleIntervalMillis);
+    public StackSampler(Thread thread, int maxEntryCount, long sampleIntervalMillis, long sampleDelayMillis) {
+        super(sampleIntervalMillis, sampleDelayMillis);
         mCurrentThread = thread;
         mMaxEntryCount = maxEntryCount;
     }
@@ -56,7 +57,7 @@ class StackSampler extends AbstractSampler {
             if (sStackMap.size() == mMaxEntryCount && mMaxEntryCount > 0) {
                 sStackMap.remove(sStackMap.keySet().iterator().next());
             }
-            sStackMap.put(System.currentTimeMillis(), stringBuilder.toString());
+            sStackMap.put(System.nanoTime(), stringBuilder.toString());
         }
     }
 }

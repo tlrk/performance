@@ -3,7 +3,8 @@ package com.example.performance_android;
 import android.os.Looper;
 import android.support.annotation.UiThread;
 
-import com.example.performance_android.block.FPSMonitor;
+import com.example.performance_android.core.BlockMonitorCore;
+import com.example.performance_android.core.FPSMonitor;
 
 /**
  * Created by tlrk on 8/6/18.
@@ -17,6 +18,10 @@ public class PerformanceMonitor {
 
     private PerformanceMonitor(PerformanceConfig config) {
         mConfiguration = config;
+    }
+
+    public static PerformanceConfig getConfiguration() {
+        return INSTANCE != null ? INSTANCE.mConfiguration : null;
     }
 
     @UiThread
@@ -56,7 +61,9 @@ public class PerformanceMonitor {
             return;
         }
         mIsStarted = true;
+        BlockMonitorCore.SAMPLE_INTERVAL = mConfiguration.provideStackDumpInterval();
 
+        FPSMonitor.get().setFPSMonitorListener(BlockMonitorCore.getInstance());
         FPSMonitor.get().start();
     }
 
@@ -65,6 +72,7 @@ public class PerformanceMonitor {
             return;
         }
         mIsStarted = false;
+        FPSMonitor.get().setFPSMonitorListener(null);
         FPSMonitor.get().stop();
     }
 }

@@ -11,9 +11,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 abstract class AbstractSampler {
 
     private static final int DEFAULT_SAMPLE_INTERVAL = 300;
+    private static final int DEFAULT_SAMPLE_DELAY = 0;
 
     protected AtomicBoolean mShouldSample = new AtomicBoolean(false);
     protected long mSampleInterval;
+    protected long mSampleDelay;
 
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -27,11 +29,12 @@ abstract class AbstractSampler {
         }
     };
 
-    public AbstractSampler(long sampleInterval) {
+    public AbstractSampler(long sampleInterval, long sampleDelay) {
         if (0 == sampleInterval) {
             sampleInterval = DEFAULT_SAMPLE_INTERVAL;
         }
         mSampleInterval = sampleInterval;
+        mSampleDelay = sampleDelay;
     }
 
     public void start() {
@@ -40,12 +43,9 @@ abstract class AbstractSampler {
         }
         mShouldSample.set(true);
 
-        // todo 配置的定义
         HandlerThreadFactory.getTimerThreadHandler().removeCallbacks(mRunnable);
-//        HandlerThreadFactory.getTimerThreadHandler().postDelayed(mRunnable,
-//                BlockCanaryInternals.getInstance().getSampleDelay());
         HandlerThreadFactory.getTimerThreadHandler().postDelayed(mRunnable,
-                300L);
+                mSampleDelay);
     }
 
     public void stop() {
