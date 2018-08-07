@@ -16,6 +16,8 @@ public class PerformanceMonitor {
     private PerformanceConfig mConfiguration;
     private volatile boolean mIsStarted = false;
 
+    private BlockMonitorCore mBlockMonitorCore;
+
     private PerformanceMonitor(PerformanceConfig config) {
         mConfiguration = config;
     }
@@ -61,9 +63,8 @@ public class PerformanceMonitor {
             return;
         }
         mIsStarted = true;
-        BlockMonitorCore.SAMPLE_INTERVAL = mConfiguration.provideStackDumpInterval();
 
-        FPSMonitor.get().setFPSMonitorListener(BlockMonitorCore.getInstance());
+        FPSMonitor.get().setFPSMonitorListener(new BlockMonitorCore(mConfiguration));
         FPSMonitor.get().start();
     }
 

@@ -2,6 +2,7 @@ package com.example.performance_android.core;
 
 import android.os.Looper;
 
+import com.example.performance_android.PerformanceConfig;
 import com.example.performance_android.sample.CpuSampler;
 import com.example.performance_android.sample.StackSampler;
 import com.example.performance_android.utils.LogUtils;
@@ -12,27 +13,15 @@ import com.example.performance_android.utils.LogUtils;
 
 public class BlockMonitorCore implements FPSMonitorListener {
 
-    private static volatile BlockMonitorCore INSTANCE;
+    private PerformanceConfig mPerformanceConfig;
 
-    public BlockMonitorCore() {
-        stackSampler = new StackSampler(Looper.getMainLooper().getThread(), SAMPLE_INTERVAL, SAMPLE_DELAY);
-        cpuSampler = new CpuSampler(SAMPLE_INTERVAL, SAMPLE_DELAY);
-    }
+    private StackSampler stackSampler;
+    private CpuSampler cpuSampler;
 
-    StackSampler stackSampler;
-    CpuSampler cpuSampler;
-    public static long SAMPLE_INTERVAL = 300L;
-    public static long SAMPLE_DELAY = 0L;
-
-    public static BlockMonitorCore getInstance() {
-        if (INSTANCE == null) {
-            synchronized (BlockMonitorCore.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new BlockMonitorCore();
-                }
-            }
-        }
-        return INSTANCE;
+    public BlockMonitorCore(PerformanceConfig config) {
+        mPerformanceConfig = config;
+        stackSampler = new StackSampler(Looper.getMainLooper().getThread(), config.provideStackDumpInterval(), config.provideStartSampleDelay());
+        cpuSampler = new CpuSampler(config.provideStackDumpInterval(), config.provideStartSampleDelay());
     }
 
     @Override
