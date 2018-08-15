@@ -1,14 +1,24 @@
 package com.example.performance_android.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by tlrk on 8/6/18.
  */
 
-public class BlockInfo extends BasicInfo {
+public class BlockInfo {
 
     private static final String TAG = "BlockInfo";
+
+    public static final SimpleDateFormat TIME_FORMATTER =
+            new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
+
+    public static final String SEPARATOR = "\r\n";
+    public static final String KV = " = ";
+
+    BasicInfo basicInfo;
 
     // Block Special info
     long timeCost;

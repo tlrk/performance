@@ -9,12 +9,6 @@ import java.util.Locale;
 
 public class BasicInfo {
 
-    public static final SimpleDateFormat TIME_FORMATTER =
-            new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
-
-    public static final String SEPARATOR = "\r\n";
-    public static final String KV = " = ";
-
     // Device info
     String sImei;
     String model;
