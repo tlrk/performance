@@ -1,4 +1,6 @@
-package com.example.performance_android.model;
+package com.example.performance_android.appluanch;
+
+import com.example.performance_android.model.BasicInfo;
 
 /**
  * 冷启动时间监控的数据对象

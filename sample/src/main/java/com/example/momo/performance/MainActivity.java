@@ -8,11 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.performance_android.appluanch.AppLaunchMonitor;
+
 public class MainActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_MAIN_ACT_CREATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
 
@@ -35,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage(getResources().getString(R.string.hello_world));
         builder.setNegativeButton("ok", null);
         builder.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_VISIBLE_TO_USER);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.performance_android.PerformanceConfig;
 import com.example.performance_android.PerformanceMonitor;
+import com.example.performance_android.appluanch.AppLaunchMonitor;
 
 /**
  * Created by momo on 8/6/18.
@@ -13,6 +14,7 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
+        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_APP_CREATE);
         super.onCreate();
         PerformanceMonitor.install(new PerformanceConfig.Builder(this)
                 .setCapturePerformance(true)
@@ -24,6 +26,8 @@ public class DemoApplication extends Application {
                 .setNetworkType("unknown")
                 .setConfigProvider(new PerformanceConfigProvider())
                 .build());
+
+        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_APP_CREATE);
     }
 
     @Override
