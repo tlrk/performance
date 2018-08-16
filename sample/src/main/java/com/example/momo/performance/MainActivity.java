@@ -15,7 +15,6 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_MAIN_ACT_CREATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
 
@@ -43,7 +42,6 @@ public class MainActivity extends BaseAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_VISIBLE_TO_USER);
     }
 
     @Override

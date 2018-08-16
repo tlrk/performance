@@ -22,7 +22,6 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
-        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_APP_CREATE);
         super.onCreate();
         try {
             Thread.sleep(1000);
@@ -40,8 +39,6 @@ public class DemoApplication extends Application {
                 .setNetworkType("unknown")
                 .setConfigProvider(new PerformanceConfigProvider())
                 .build());
-
-        AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_APP_CREATE);
     }
 
     @Override
