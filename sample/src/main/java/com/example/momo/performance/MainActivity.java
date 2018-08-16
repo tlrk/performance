@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.example.performance_android.appluanch.AppLaunchMonitor;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity {
 
 
     @Override

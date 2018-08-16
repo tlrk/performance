@@ -87,9 +87,9 @@ public class FPSMonitor {
             if (TimeUnit.NANOSECONDS.toMillis((frameTimeNanos - mLastTimeNanos)) >= 1000) {
                 // 如果时间已经过去了1S，则计算帧率
                 FPS = Math.min(60, mClockFrame);
-                LogUtils.logD("pre : " + LogUtils.TIME_FORMATTER.format(mLastTimeNanos)
-                + " cur : " + LogUtils.TIME_FORMATTER.format(frameTimeNanos)
-                + " fps = "  + FPS);
+//                LogUtils.logD("pre : " + LogUtils.TIME_FORMATTER.format(mLastTimeNanos)
+//                + " cur : " + LogUtils.TIME_FORMATTER.format(frameTimeNanos)
+//                + " fps = "  + FPS);
                 if (PerformanceMonitor.getConfiguration() != null
                         && FPS < PerformanceMonitor.getConfiguration().provideFpsThreshold()) {
                     dispatchBlockEvent(mLastTimeNanos, frameTimeNanos, FPS);

@@ -1,7 +1,10 @@
 package com.example.momo.performance;
 
 import android.app.Application;
+import android.os.SystemClock;
+import android.util.Log;
 
+import com.example.performance_android.AutoSpeed;
 import com.example.performance_android.PerformanceConfig;
 import com.example.performance_android.PerformanceMonitor;
 import com.example.performance_android.appluanch.AppLaunchMonitor;
@@ -12,10 +15,21 @@ import com.example.performance_android.appluanch.AppLaunchMonitor;
 
 public class DemoApplication extends Application {
 
+    public DemoApplication() {
+        super();
+        AutoSpeed.getInstance().onColdStart(SystemClock.elapsedRealtime());
+    }
+
     @Override
     public void onCreate() {
         AppLaunchMonitor.getInstance().markLifeCycleMethodExecute(AppLaunchMonitor.APP_LAUNCH_START_APP_CREATE);
         super.onCreate();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        AutoSpeed.getInstance().init(this);
         PerformanceMonitor.install(new PerformanceConfig.Builder(this)
                 .setCapturePerformance(true)
                 .setMonitorBlock(true)

@@ -1,4 +1,6 @@
-package com.example.performance_android.model;
+package com.example.performance_android.pageLaunch;
+
+import com.example.performance_android.model.BasicInfo;
 
 /**
  * 页面 （Activity 或者 Fragment 启动速度）
