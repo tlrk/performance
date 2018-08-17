@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -75,9 +76,12 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
+
                     e.printStackTrace();
                     Log.e(DEMO_FRAGMENT, "onClick of R.id.button1: ", e);
                 }
+                TextView view = (TextView)v;
+                view.setText("changed");
                 break;
             case R.id.button2:
                 for (int i = 0; i < 100; ++i) {

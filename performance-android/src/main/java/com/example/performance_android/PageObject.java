@@ -23,13 +23,13 @@ public class PageObject {
 
     public void onCreate() {
         createTime = CommonUtils.getRealTime();
-        LogUtils.logD("onPageCreate " + createTime);
+        LogUtils.logD(pageTag + " onPageCreate " + createTime);
     }
 
     public void onDrawEnd() {
 
         initialDrawEndTime = CommonUtils.getRealTime();
-        LogUtils.logD("onPageDrawEnd " + initialDrawEndTime);
+        LogUtils.logD(pageTag + " onPageDrawEnd " + initialDrawEndTime);
         if (pageShowListener != null) {
             pageShowListener.onPageShow(objectKey);
         }
