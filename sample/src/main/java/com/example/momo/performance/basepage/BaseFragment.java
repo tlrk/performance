@@ -8,35 +8,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.performance_android.pageLaunch.PageLifeCycleCallback;
+import com.example.performance_android.AutoSpeed;
+import com.example.performance_android.AutoSpeedFrameLayout;
+import com.example.performance_android.utils.CommonUtils;
 
 /**
  * Created by momo on 8/6/18.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
-    PageLifeCycleCallback mPageLifeCycleCallback;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (mPageLifeCycleCallback != null) {
-            mPageLifeCycleCallback.onPageCreated();
-        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AutoSpeed.getInstance().onPageCreate(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return AutoSpeedFrameLayout.wrap(CommonUtils.getObjectKey(this), getContentView(inflater, container, savedInstanceState));
     }
+
+    protected abstract View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mPageLifeCycleCallback != null) {
-            mPageLifeCycleCallback.onPageVisibileToUser();
-        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        AutoSpeed.getInstance().onPageDestroy(this);
     }
 }

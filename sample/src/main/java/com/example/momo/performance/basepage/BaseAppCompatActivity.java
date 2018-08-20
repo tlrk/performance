@@ -33,4 +33,10 @@ public class BaseAppCompatActivity extends AppCompatActivity {
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         super.setContentView(AutoSpeed.getInstance().createPageView(this, view, params));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AutoSpeed.getInstance().onPageDestroy(this);
+    }
 }

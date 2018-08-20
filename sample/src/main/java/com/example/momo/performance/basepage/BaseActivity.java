@@ -35,5 +35,10 @@ public class BaseActivity extends FragmentActivity {
         super.setContentView(AutoSpeed.getInstance().createPageView(this, view, params));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AutoSpeed.getInstance().onPageDestroy(this);
+    }
 
 }

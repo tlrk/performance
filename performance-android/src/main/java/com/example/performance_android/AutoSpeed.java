@@ -60,6 +60,15 @@ public class AutoSpeed implements PageShowListener{
         }
     }
 
+    public void onPageDestroy(Object uiObj) {
+        int pageObjKey = CommonUtils.getObjectKey(uiObj);
+        PageObject pageObject = activePages.get(pageObjKey);
+        if (pageObject != null) {
+            activePages.remove(pageObjKey);
+            pageObject = null;
+        }
+    }
+
     public View createPageView(Object pageObject, View targetView) {
         int objectKey = CommonUtils.getObjectKey(pageObject);
         return AutoSpeedFrameLayout.wrap(objectKey, targetView);
@@ -83,9 +92,10 @@ public class AutoSpeed implements PageShowListener{
     @Override
     public void onPageShow(int objectKey) {
         PageObject pageObject = activePages.get(objectKey);
-        if (pageObject != null) {
+        boolean isMainPage = "MainTabActivity".equals(pageObject.getPageTag());
+        if (isMainPage) {
             long endTime = pageObject.getInitialDrawEndTime();
-            log("app cost " + (endTime - coldStartTime) + " ms");
+            log("app(Main page) cost " + (endTime - coldStartTime) + " ms");
         }
     }
 }

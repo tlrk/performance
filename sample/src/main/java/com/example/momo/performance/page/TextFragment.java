@@ -2,6 +2,7 @@ package com.example.momo.performance.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ public class TextFragment extends BaseFragment {
     private String mTitle = "DefaultValue";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected View getContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle arguments = getArguments();
         if (arguments != null) {
             mTitle = arguments.getString(BUNDLE_TITLE);

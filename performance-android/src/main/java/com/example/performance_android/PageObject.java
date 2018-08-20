@@ -14,6 +14,7 @@ public class PageObject {
     private int objectKey;
     private String pageTag;
     private PageShowListener pageShowListener;
+    private boolean hasShow = false;
 
     public PageObject(int objectKey, String pageTag, PageShowListener pageShowListener) {
         this.objectKey = objectKey;
@@ -28,10 +29,14 @@ public class PageObject {
 
     public void onDrawEnd() {
 
+        if (hasShow)
+            return;
+
         initialDrawEndTime = CommonUtils.getRealTime();
         LogUtils.logD(pageTag + " onPageDrawEnd " + initialDrawEndTime);
-        if (pageShowListener != null) {
+        if (!hasShow && pageShowListener != null) {
             pageShowListener.onPageShow(objectKey);
+            hasShow = true;
         }
         LogUtils.logD("Page " + pageTag + " cost " + (initialDrawEndTime - createTime) + " ms");
     }
@@ -46,5 +51,9 @@ public class PageObject {
 
     public long getFinalDrawEndTime() {
         return finalDrawEndTime;
+    }
+
+    public String getPageTag() {
+        return pageTag;
     }
 }
