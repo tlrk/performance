@@ -1,16 +1,16 @@
-package com.example.momo.performance;
+package com.example.momo.performance.page;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.performance_android.appluanch.AppLaunchMonitor;
+import com.example.momo.performance.R;
+import com.example.momo.performance.basepage.BaseAppCompatActivity;
 
-public class MainActivity extends BaseAppCompatActivity {
+public class JankActivity extends BaseAppCompatActivity {
 
 
     @Override

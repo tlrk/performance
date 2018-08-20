@@ -1,107 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/toJank"
+        android:text="toJank"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_height"
-        android:background="@color/material_blue">
+        android:layout_height="wrap_content"/>
 
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
-
-    </RelativeLayout>
-
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#888" />
+
+
+    <com.example.momo.performance.tabIndicator.AlphaTabsIndicator
+        android:id="@+id/alphaIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+
+        <com.example.momo.performance.tabIndicator.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:padding="5dp"
+            app:tabIconNormal="@mipmap/home_normal"
+            app:tabIconSelected="@mipmap/home_selected"
+            app:tabText="微信"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="#46c01b" />
 
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_select"
-                android:gravity="center"
-                android:text="@string/thread_waiting"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"/>
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_select"
-                android:gravity="center"
-                android:text="@string/io_waiting"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <com.example.momo.performance.tabIndicator.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:padding="5dp"
+            app:tabIconNormal="@mipmap/category_normal"
+            app:tabIconSelected="@mipmap/category_selected"
+            app:tabText="通讯录"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="#46c01b" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_select"
-                android:gravity="center"
-                android:text="@string/cpu_busy"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"/>
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_select"
-                android:gravity="center"
-                android:text="@string/more"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"/>
-        </LinearLayout>
-
-    </LinearLayout>
+        <com.example.momo.performance.tabIndicator.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@mipmap/service_normal"
+            app:tabIconSelected="@mipmap/service_selected"
+            app:tabText="发现"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="#46c01b" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_done"/>
-
-
-</RelativeLayout>
+        <com.example.momo.performance.tabIndicator.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabIconNormal="@mipmap/mine_normal"
+            app:tabIconSelected="@mipmap/mine_selected"
+            app:tabText="我"
+            app:tabTextSize="13sp"
+            app:textColorNormal="#999999"
+            app:textColorSelected="#46c01b" />
+    </com.example.momo.performance.tabIndicator.AlphaTabsIndicator>
+</LinearLayout>

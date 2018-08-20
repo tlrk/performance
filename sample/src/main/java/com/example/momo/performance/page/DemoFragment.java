@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.momo.performance;
+package com.example.momo.performance.page;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +24,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.momo.performance.R;
+import com.example.momo.performance.basepage.BaseFragment;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class DemoFragment extends Fragment implements View.OnClickListener {
+public class DemoFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String DEMO_FRAGMENT = "DemoFragment";
 
@@ -44,7 +46,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_main, null);
+        return inflater.inflate(R.layout.activity_jank, null);
     }
 
     @Override

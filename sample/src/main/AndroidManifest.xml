@@ -10,13 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/ModuThreeHandsomeTheme"
         android:supportsRtl="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".page.MainTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".page.JankActivity">
+        </activity>
+
     </application>
 
 </manifest>
