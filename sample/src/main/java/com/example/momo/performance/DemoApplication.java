@@ -8,6 +8,7 @@ import com.example.performance_android.AutoSpeed;
 import com.example.performance_android.PerformanceConfig;
 import com.example.performance_android.PerformanceMonitor;
 import com.example.performance_android.appluanch.AppLaunchMonitor;
+import com.example.performance_android.utils.CommonUtils;
 
 /**
  * Created by momo on 8/6/18.
@@ -17,7 +18,7 @@ public class DemoApplication extends Application {
 
     public DemoApplication() {
         super();
-        AutoSpeed.getInstance().onColdStart(SystemClock.elapsedRealtime());
+        AutoSpeed.getInstance().onColdStart(CommonUtils.getRealTime());
     }
 
     @Override

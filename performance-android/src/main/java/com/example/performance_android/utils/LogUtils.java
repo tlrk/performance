@@ -24,4 +24,10 @@ public class LogUtils {
         }
     }
 
+    public static void logWithTime(String msg, long time) {
+        if(BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, msg + " " + CommonUtils.convertTime(time));
+        }
+    }
+
 }

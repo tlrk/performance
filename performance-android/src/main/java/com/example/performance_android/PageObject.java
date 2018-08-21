@@ -24,7 +24,7 @@ public class PageObject {
 
     public void onCreate() {
         createTime = CommonUtils.getRealTime();
-        LogUtils.logD(pageTag + " onPageCreate " + createTime);
+        LogUtils.logWithTime(pageTag + " onPageCreate ", createTime);
     }
 
     public void onDrawEnd() {
@@ -33,7 +33,7 @@ public class PageObject {
             return;
 
         initialDrawEndTime = CommonUtils.getRealTime();
-        LogUtils.logD(pageTag + " onPageDrawEnd " + initialDrawEndTime);
+        LogUtils.logWithTime(pageTag + " onPageDrawEnd ", initialDrawEndTime);
         if (!hasShow && pageShowListener != null) {
             pageShowListener.onPageShow(objectKey);
             hasShow = true;

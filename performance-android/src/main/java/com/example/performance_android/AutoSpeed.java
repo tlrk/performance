@@ -35,7 +35,7 @@ public class AutoSpeed implements PageShowListener{
      */
     public void onColdStart(long coldStartTime) {
         this.coldStartTime = coldStartTime;
-        log("onColdStart " + coldStartTime);
+        LogUtils.logWithTime("onColdStart", coldStartTime);
     }
 
 
@@ -65,6 +65,7 @@ public class AutoSpeed implements PageShowListener{
         PageObject pageObject = activePages.get(pageObjKey);
         if (pageObject != null) {
             activePages.remove(pageObjKey);
+            log(pageObject.getPageTag() + " destroyed to end track");
             pageObject = null;
         }
     }

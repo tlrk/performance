@@ -13,7 +13,7 @@ public class BlockInfo {
     private static final String TAG = "BlockInfo";
 
     public static final SimpleDateFormat TIME_FORMATTER =
-            new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
+            new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.CHINA);
 
     public static final String SEPARATOR = "\r\n";
     public static final String KV = " = ";
