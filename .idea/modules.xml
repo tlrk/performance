@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/performance-android/performance-android.iml" filepath="$PROJECT_DIR$/performance-android/performance-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/performance-android-no-op/performance-android-no-op.iml" filepath="$PROJECT_DIR$/performance-android-no-op/performance-android-no-op.iml" />
       <module fileurl="file://$PROJECT_DIR$/performance-android-no-op/performance-android-noop.iml" filepath="$PROJECT_DIR$/performance-android-no-op/performance-android-noop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/performance_injector/performance_injector.iml" filepath="$PROJECT_DIR$/performance_injector/performance_injector.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>

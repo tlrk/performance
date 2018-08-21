@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.immomo.performance'
 
 android {
     compileSdkVersion 26

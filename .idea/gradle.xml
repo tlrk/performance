@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/performance-android" />
             <option value="$PROJECT_DIR$/performance-android-no-op" />
+            <option value="$PROJECT_DIR$/performance_injector" />
             <option value="$PROJECT_DIR$/sample" />
           </set>
         </option>
