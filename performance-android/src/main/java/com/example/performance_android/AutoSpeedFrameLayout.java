@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.example.performance_android.utils.LogUtils;
+
 /**
  * Created by tlrk on 8/16/18.
  */
@@ -64,8 +66,28 @@ public class AutoSpeedFrameLayout extends FrameLayout {
         super(context);
         this.pageObjectKey = pageObjectKey;
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        LogUtils.logD("onMeasure");
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+//        LogUtils.logD("onLayout");
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+//        LogUtils.logD("onDraw");
+        super.onDraw(canvas);
+    }
+
     @Override
     protected void dispatchDraw(Canvas canvas) {
+//        LogUtils.logD("dispatchDraw");
         super.dispatchDraw(canvas);
         AutoSpeed.getInstance().onPageDrawEnd(pageObjectKey);
     }
