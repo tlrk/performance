@@ -33,7 +33,7 @@ public class AutoSpeed implements PageShowListener{
      * 冷启动初始时间以构造函数为准，可以算入MultiDex注入的时间，比在 onCreate() 中计算更为准确。
      * @param coldStartTime
      */
-    public void onColdStart(long coldStartTime) {
+    private void onColdStart(long coldStartTime) {
         this.coldStartTime = coldStartTime;
         LogUtils.logWithTime("onColdStart", coldStartTime);
     }
@@ -41,6 +41,7 @@ public class AutoSpeed implements PageShowListener{
 
     public void init(Application context) {
         this.appContext = context;
+        onColdStart(CommonUtils.getRealTime());
     }
 
     public void onPageCreate(Object uiObj) {

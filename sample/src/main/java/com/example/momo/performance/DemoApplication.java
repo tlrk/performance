@@ -18,18 +18,17 @@ public class DemoApplication extends Application {
 
     public DemoApplication() {
         super();
-        AutoSpeed.getInstance().onColdStart(CommonUtils.getRealTime());
     }
 
     @Override
     public void onCreate() {
+//        AutoSpeed.getInstance().init(this); Aop 方式注入
         super.onCreate();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        AutoSpeed.getInstance().init(this);
         PerformanceMonitor.install(new PerformanceConfig.Builder(this)
                 .setCapturePerformance(true)
                 .setMonitorBlock(true)
