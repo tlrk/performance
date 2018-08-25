@@ -22,24 +22,30 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
-//        AutoSpeed.getInstance().init(this); Aop 方式注入
+        com.example.performance_android.AutoSpeed.getInstance().init(this);
         super.onCreate();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        PerformanceMonitor.install(new PerformanceConfig.Builder(this)
-                .setCapturePerformance(true)
-                .setMonitorBlock(true)
-                .setMonitorPageLaunch(true)
-                .setFpsThreshold(20)
-                .setStackDumpInterval(1000)
-                .setStartSampleDelay(0)
-                .setNetworkType("unknown")
-                .setConfigProvider(new PerformanceConfigProvider())
-                .build());
     }
+
+    //    @Override
+//    public void onCreate() {
+////        AutoSpeed.getInstance().init(this); Aop 方式注入
+//        super.onCreate();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        PerformanceMonitor.install(new PerformanceConfig.Builder(this)
+//                .setCapturePerformance(true)
+//                .setMonitorBlock(true)
+//                .setMonitorPageLaunch(true)
+//                .setFpsThreshold(20)
+//                .setStackDumpInterval(1000)
+//                .setStartSampleDelay(0)
+//                .setNetworkType("unknown")
+//                .setConfigProvider(new PerformanceConfigProvider())
+//                .build());
+//    }
 
     @Override
     public void onTerminate() {

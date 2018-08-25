@@ -45,70 +45,98 @@ public class PerformanceTransform extends Transform {
     }
 
     private static void injectBaseActivityCode(CtClass ctBaseAct, String filePath) {
-        println("injectBaseActivityCode begin")
+        println("inject --> " + ctBaseAct.getName() + " <-- begin")
         classPool.importPackage("android.os.Bundle")
         ctBaseAct.defrost()
+        boolean onCreateDone = false
+        boolean onDestroyDone = false
+        boolean[] setContentViewDones = new boolean[3]
+        int step = 0;
 
         try {
             for (CtMethod ctMethod : ctBaseAct.getDeclaredMethods()) {
-                println("---> " + ctMethod.getName())
                 if (ctMethod.getName().contains("onCreate")) {
-                    ctMethod.insertAfter(getActOnCreateContent())
+                    ctMethod.insertAfter("com.example.performance_android.AutoSpeed.getInstance().onPageCreate(this);")
+                    onCreateDone = true
+                    println(String.valueOf(++step) + ", ----> " + ctBaseAct.getName() + ".onCreate finished")
+                } else if (ctMethod.getName().contains("onDestroy")) {
+                    ctMethod.insertAfter("com.example.performance_android.AutoSpeed.getInstance().onPageDestroy(this);")
+                    onDestroyDone = true
+                    println(String.valueOf(++step) + ", ----> " + ctBaseAct.getName() + ".onDestroy finished")
+                } else if (ctMethod.getName().contains("setContentView")) {
+
                 }
             }
 
         } catch (CannotCompileException | NotFoundException e) {
-
             println("could not found onCreate in Application;   " + e.toString())
-
-            StringBuilder methodBody = new StringBuilder()
-            methodBody.append("protected void onCreate() {")
-            methodBody.append("super.onCreate(Bundle savedInstanceState);")
-            methodBody.append(getActOnCreateContent())
-            methodBody.append("}")
-            ctBaseAct.addMethod(CtMethod.make(methodBody.toString(), ctBaseAct))
         } catch (Exception e) {
-            println("could not create onCreate(Bundle savedInstanceState) in Application;   " + e.toString())
+            println("inject activity method failed;   " + e.toString())
+        } finally {
+            if (!onCreateDone) {
+                String createBody =
+                        """
+                        protected void onCreate(@Nullable Bundle savedInstanceState) {
+                            super.onCreate(savedInstanceState);
+                            com.example.performance_android.AutoSpeed.getInstance().onPageCreate(this);
+                        }
+                        """
+                ctBaseAct.addMethod(CtMethod.make(createBody, ctBaseAct))
+                onCreateDone = true
+                println(String.valueOf(++step) + ", ----> " + ctBaseAct.getName() + ".onCreate finished")
+            }
+
+            if (!onDestroyDone) {
+                String destroyBody =
+                        """
+                        protected void onDestroy() {
+                            super.onDestroy();
+                            com.example.performance_android.AutoSpeed.getInstance().onPageDestroy(this);
+                        }
+                        """
+                ctBaseAct.addMethod(CtMethod.make(destroyBody.toString(), ctBaseAct))
+                onDestroyDone = true
+                println(String.valueOf(++step) + ", ----> " + ctBaseAct.getName() + ".onDestroy finished")
+            }
+
+            if (!onCreateDone || !onDestroyDone) {
+                throw new IllegalStateException("not all methods inject complete, please check")
+            }
         }
         ctBaseAct.writeFile(filePath)
 
-        println("injectBaseActivityCode success ")
+        println("inject --> " + ctBaseAct.getName() + " <-- end\n")
     }
 
 
     private static void injectApplicationCode(CtClass ctClassApplication, String filePath) {
-        println("injectApplicationCode begin")
+        println("inject --> " + ctClassApplication.getName() + " <-- begin")
         ctClassApplication.defrost()
+        boolean success = false;
         try {
             CtMethod attachBaseContextMethod = ctClassApplication.getDeclaredMethod("onCreate", null)
-            attachBaseContextMethod.insertBefore(getAppInjectContent())
+            attachBaseContextMethod.insertBefore("com.example.performance_android.AutoSpeed.getInstance().init(this);")
+            success  = true
         } catch (CannotCompileException | NotFoundException e) {
 
             println("could not found onCreate in Application;   " + e.toString())
 
-            StringBuilder methodBody = new StringBuilder()
-            methodBody.append("protected void onCreate() {")
-            methodBody.append(getAppInjectContent())
-            methodBody.append("super.onCreate();")
-            methodBody.append("}")
-            ctClassApplication.addMethod(CtMethod.make(methodBody.toString(), ctClassApplication))
+            String createBody =
+                    """
+                    public void onCreate() {
+                        com.example.performance_android.AutoSpeed.getInstance().init(this);
+                        super.onCreate();
+                    }
+                    """
+            ctClassApplication.addMethod(CtMethod.make(createBody, ctClassApplication))
+            success = true
         } catch (Exception e) {
             println("could not create onCreate() in Application;   " + e.toString())
+        } finally {
+            println("1, inject ----> " + ctClassApplication.getName() + ".onCreate " + (success ? "finished" : "failed"))
         }
         ctClassApplication.writeFile(filePath)
-//        ctClassApplication.detach()
-
-        println("injectApplicationCode success ")
-    }
-
-    private static String getAppInjectContent() {
-        return """ com.example.performance_android.AutoSpeed.getInstance().init(this);
-               """
-    }
-
-    private static String getActOnCreateContent() {
-        return """ com.example.performance_android.AutoSpeed.getInstance().onPageCreate(this);
-               """
+        println("inject --> " + ctClassApplication.getName() + " <-- end\n")
     }
 
     private void getHostAppInfo() {
@@ -170,11 +198,8 @@ public class PerformanceTransform extends Transform {
             //遍历文件夹
             input.directoryInputs.each { DirectoryInput directoryInput ->
                 //注入代码
-                System.out.println(">>>")
-                System.out.println(">>>")
-                System.out.println(">>>")
-                System.out.println(">>>")
-
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
                 String fileName = directoryInput.file.absolutePath
                 File dir = new File(fileName)

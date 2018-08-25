@@ -7,18 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.performance_android.AutoSpeed;
-import com.example.performance_android.utils.LogUtils;
 
 /**
  * Created by tlrk on 8/16/18.
  */
 public class BaseAppCompatActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        LogUtils.logD("onCreate");
-//        AutoSpeed.getInstance().onPageCreate(this);
     }
 
     @Override
@@ -48,9 +46,4 @@ public class BaseAppCompatActivity extends AppCompatActivity {
         super.setContentView(AutoSpeed.getInstance().createPageView(this, view, params));
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        AutoSpeed.getInstance().onPageDestroy(this);
-    }
 }
