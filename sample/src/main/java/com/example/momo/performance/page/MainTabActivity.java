@@ -48,7 +48,7 @@ public class MainTabActivity extends BaseAppCompatActivity {
         findViewById(R.id.toJank).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainTabActivity.this, JankActivity.class));
+                startActivity(new Intent(MainTabActivity.this, TestMainActivity.class));
             }
         });
     }

@@ -21,6 +21,11 @@
         <activity android:name=".page.JankActivity">
         </activity>
 
+        <activity android:name=".page.TestMainActivity">
+
+        </activity>
+
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.immomo.performance
 
+import android.os.Bundle
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.dd.buildgradle.ConvertUtil
@@ -17,6 +18,7 @@ public class PerformanceTransform extends Transform {
     private Project mProject
     ClassPool classPool
     private String applicationName
+    private String[] basePagesArray
 
     PerformanceTransform(Project project) {
         mProject = project;
@@ -42,6 +44,33 @@ public class PerformanceTransform extends Transform {
     boolean isIncremental() {
         return false
     }
+
+    private static void injectBaseActivityCode(CtClass ctBaseAct, String filePath) {
+        println("injectBaseActivityCode begin")
+//        classPool.importPackage("android.os.Bundle")
+//        ctBaseAct.defrost()
+//
+//        try {
+//            CtMethod attachBaseContextMethod = ctBaseAct.getDeclaredMethod("onCreate", classPool.get(Bundle.class.getName()))
+//            attachBaseContextMethod.insertAfter(getAppInjectContent())
+//        } catch (CannotCompileException | NotFoundException e) {
+//
+//            println("could not found onCreate in Application;   " + e.toString())
+//
+//            StringBuilder methodBody = new StringBuilder()
+//            methodBody.append("protected void onCreate() {")
+//            methodBody.append("super.onCreate(Bundle savedInstanceState);")
+//            methodBody.append(getAppInjectContent())
+//            methodBody.append("}")
+//            ctBaseAct.addMethod(CtMethod.make(methodBody.toString(), ctBaseAct))
+//        } catch (Exception e) {
+//            println("could not create onCreate(Bundle savedInstanceState) in Application;   " + e.toString())
+//        }
+//        ctBaseAct.writeFile(filePath)
+
+        println("injectBaseActivityCode success ")
+    }
+
 
     private static void injectApplicationCode(CtClass ctClassApplication, String filePath) {
         println("injectApplicationCode begin")
@@ -73,10 +102,16 @@ public class PerformanceTransform extends Transform {
                """
     }
 
-    private void getRealApplicationName() {
+    private void getHostAppInfo() {
         applicationName = mProject.extensions.performanceInjectorCmd.applicationName
         if (applicationName == null || applicationName.isEmpty()) {
             throw new RuntimeException("you should set applicationName in performanceInjectorCmd")
+        }
+        String str = mProject.extensions.performanceInjectorCmd.basePagesWithFullName
+        println(str)
+        basePagesArray = str.split(",")
+        if (basePagesArray == null) {
+            throw new RuntimeException("you should set basePages class in performanceInjectorCmd");
         }
     }
 
@@ -91,24 +126,33 @@ public class PerformanceTransform extends Transform {
         return false
     }
 
+    private boolean isBaseActivity(CtClass ctClass) {
+        return basePagesArray != null && basePagesArray.contains(ctClass.getName())
+    }
+
     @Override
     void transform(Context context, Collection<TransformInput> inputs, Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider, boolean isIncremental) throws IOException, TransformException, InterruptedException {
         System.out.println("----------------进入transform了--------------")
-        getRealApplicationName()
+        getHostAppInfo()
         classPool = new ClassPool()
         mProject.android.bootClasspath.each {
             classPool.appendClassPath((String) it.absolutePath)
         }
+        classPool.importPackage("android.support.v7.app.AppCompatActivity")
 
         def box = ConvertUtil.toCtClasses(inputs, classPool)
 
-        CtClass appCtClass;
-
+        CtClass appCtClass
+        List<CtClass> activityCtClasses = new ArrayList<>();
 
         for (CtClass ctClass : box) {
             if (isApplication(ctClass)) {
                 appCtClass = ctClass;
                 println("app class is " + ctClass.getName())
+            }
+            if (isBaseActivity(ctClass)) {
+                activityCtClasses.add(ctClass)
+                println("base page class is " + ctClass.getName())
             }
         }
 
@@ -122,7 +166,30 @@ public class PerformanceTransform extends Transform {
                 System.out.println(">>>")
                 System.out.println(">>>")
 
-                injectApplicationCode(appCtClass, directoryInput.file.absolutePath)
+
+                String fileName = directoryInput.file.absolutePath
+                File dir = new File(fileName)
+                dir.eachFileRecurse { File file ->
+
+                    String filePath = file.absolutePath
+                    String classNameTemp = filePath.replace(fileName, "")
+                            .replace("\\", ".")
+                            .replace("/", ".")
+                    if (classNameTemp.endsWith(".class")) {
+                        String className = classNameTemp.substring(1, classNameTemp.length() - 6)
+                        if (className == applicationName) {
+                            injectApplicationCode(appCtClass, fileName)
+                        }
+
+                        for (CtClass actClass : activityCtClasses) {
+                            if (className == actClass.getName()) {
+                                injectBaseActivityCode(actClass, fileName)
+                            }
+                        }
+                    }
+                }
+
+
 
                 // 获取output目录
                 def dest = outputProvider.getContentLocation(directoryInput.name,
