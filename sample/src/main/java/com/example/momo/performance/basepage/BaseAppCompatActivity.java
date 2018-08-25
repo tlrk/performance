@@ -18,7 +18,7 @@ public class BaseAppCompatActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        LogUtils.logD("onCreate");
-        AutoSpeed.getInstance().onPageCreate(this);
+//        AutoSpeed.getInstance().onPageCreate(this);
     }
 
     @Override

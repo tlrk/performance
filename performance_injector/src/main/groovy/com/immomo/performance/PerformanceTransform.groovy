@@ -1,6 +1,5 @@
 package com.immomo.performance
 
-import android.os.Bundle
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.dd.buildgradle.ConvertUtil
@@ -16,7 +15,7 @@ public class PerformanceTransform extends Transform {
 
 
     private Project mProject
-    ClassPool classPool
+    private static ClassPool classPool
     private String applicationName
     private String[] basePagesArray
 
@@ -47,26 +46,31 @@ public class PerformanceTransform extends Transform {
 
     private static void injectBaseActivityCode(CtClass ctBaseAct, String filePath) {
         println("injectBaseActivityCode begin")
-//        classPool.importPackage("android.os.Bundle")
-//        ctBaseAct.defrost()
-//
-//        try {
-//            CtMethod attachBaseContextMethod = ctBaseAct.getDeclaredMethod("onCreate", classPool.get(Bundle.class.getName()))
-//            attachBaseContextMethod.insertAfter(getAppInjectContent())
-//        } catch (CannotCompileException | NotFoundException e) {
-//
-//            println("could not found onCreate in Application;   " + e.toString())
-//
-//            StringBuilder methodBody = new StringBuilder()
-//            methodBody.append("protected void onCreate() {")
-//            methodBody.append("super.onCreate(Bundle savedInstanceState);")
-//            methodBody.append(getAppInjectContent())
-//            methodBody.append("}")
-//            ctBaseAct.addMethod(CtMethod.make(methodBody.toString(), ctBaseAct))
-//        } catch (Exception e) {
-//            println("could not create onCreate(Bundle savedInstanceState) in Application;   " + e.toString())
-//        }
-//        ctBaseAct.writeFile(filePath)
+        classPool.importPackage("android.os.Bundle")
+        ctBaseAct.defrost()
+
+        try {
+            for (CtMethod ctMethod : ctBaseAct.getDeclaredMethods()) {
+                println("---> " + ctMethod.getName())
+                if (ctMethod.getName().contains("onCreate")) {
+                    ctMethod.insertAfter(getActOnCreateContent())
+                }
+            }
+
+        } catch (CannotCompileException | NotFoundException e) {
+
+            println("could not found onCreate in Application;   " + e.toString())
+
+            StringBuilder methodBody = new StringBuilder()
+            methodBody.append("protected void onCreate() {")
+            methodBody.append("super.onCreate(Bundle savedInstanceState);")
+            methodBody.append(getActOnCreateContent())
+            methodBody.append("}")
+            ctBaseAct.addMethod(CtMethod.make(methodBody.toString(), ctBaseAct))
+        } catch (Exception e) {
+            println("could not create onCreate(Bundle savedInstanceState) in Application;   " + e.toString())
+        }
+        ctBaseAct.writeFile(filePath)
 
         println("injectBaseActivityCode success ")
     }
@@ -99,6 +103,11 @@ public class PerformanceTransform extends Transform {
 
     private static String getAppInjectContent() {
         return """ com.example.performance_android.AutoSpeed.getInstance().init(this);
+               """
+    }
+
+    private static String getActOnCreateContent() {
+        return """ com.example.performance_android.AutoSpeed.getInstance().onPageCreate(this);
                """
     }
 
