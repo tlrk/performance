@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.performance_android.AutoSpeed;
-
 /**
  * Created by momo on 8/6/18.
  */
@@ -21,17 +19,17 @@ public class BaseActivity extends FragmentActivity {
 
     @Override
     public void setContentView(View view) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, view));
+        super.setContentView(view);
     }
 
     @Override
     public void setContentView(int layoutResID) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, layoutResID));
+        super.setContentView(layoutResID);
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, view, params));
+        super.setContentView(view, params);
     }
 
     @Override

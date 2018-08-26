@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.performance_android.AutoSpeed;
 
 /**
  * Created by tlrk on 8/16/18.
@@ -32,18 +31,13 @@ public class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    public void setContentView(View view) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, view));
-    }
-
-    @Override
     public void setContentView(int layoutResID) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, layoutResID));
+        super.setContentView(layoutResID);
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
-        super.setContentView(AutoSpeed.getInstance().createPageView(this, view, params));
+        super.setContentView(view, params);
     }
 
 }

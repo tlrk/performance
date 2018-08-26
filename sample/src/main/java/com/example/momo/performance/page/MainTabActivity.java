@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.example.momo.performance.R;
+import com.example.momo.performance.basepage.BaseActivity;
 import com.example.momo.performance.basepage.BaseAppCompatActivity;
 import com.example.momo.performance.tabIndicator.AlphaTabsIndicator;
 
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by tlrk on 8/20/18.
  */
-public class MainTabActivity extends BaseAppCompatActivity {
+public class MainTabActivity extends BaseActivity {
 
 
     private AlphaTabsIndicator alphaTabsIndicator;
