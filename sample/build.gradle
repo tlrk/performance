@@ -21,7 +21,7 @@ android {
 
 performanceInjectorCmd {
     applicationName = 'com.example.momo.performance.DemoApplication'
-    basePagesWithFullName = 'com.example.momo.performance.basepage.BaseActivity,com.example.momo.performance.basepage.BaseAppCompatActivity'
+    basePagesWithFullName = 'com.example.performance_android.TestActivity'
 }
 
 dependencies {

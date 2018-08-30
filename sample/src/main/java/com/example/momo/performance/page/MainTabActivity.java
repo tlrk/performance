@@ -2,6 +2,7 @@ package com.example.momo.performance.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -54,6 +55,11 @@ public class MainTabActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Debug.stopMethodTracing();
+    }
 
     private class MainAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
@@ -82,6 +88,7 @@ public class MainTabActivity extends BaseActivity {
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
+
 
         @Override
         public void onPageSelected(int position) {

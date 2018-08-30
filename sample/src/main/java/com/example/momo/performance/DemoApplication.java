@@ -1,6 +1,7 @@
 package com.example.momo.performance;
 
 import android.app.Application;
+import android.os.Debug;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
+        Debug.startMethodTracing("performance");
         com.example.performance_android.AutoSpeed.getInstance().init(this);
         super.onCreate();
     }

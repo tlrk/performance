@@ -8,7 +8,7 @@ dependencies {
     //groovy sdk
     compile localGroovy()
 
-    compile 'org.apache.commons.io:commonsIO:2.5.0'
+//    compile 'org.apache.commons.io:commonsIO:2.5.0'
     compile 'com.android.tools.build:gradle:3.0.1'
     compile "org.javassist:javassist:3.21.0-GA"
 }
@@ -21,7 +21,7 @@ repositories {
 
 //group和version
 group='com.immomo.performance'
-version='1.0.0'
+version='1.0.1'
 
 //打包到本地或者远程Maven库
 uploadArchives {

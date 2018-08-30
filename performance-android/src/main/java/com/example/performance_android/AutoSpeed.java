@@ -39,7 +39,7 @@ public class AutoSpeed implements PageShowListener{
     }
 
 
-    public void init(Application context) {
+    public void init(Context context) {
         this.appContext = context;
         onColdStart(CommonUtils.getRealTime());
     }

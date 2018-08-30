@@ -307,6 +307,9 @@ public class PerformanceTransform extends Transform {
                         }
 
                         for (CtClass actClass : activityCtClasses) {
+                            if (className.contains("Activity")) {
+                                println(" set class = " + actClass.getName() + " curclass = " + className)
+                            }
                             if (className == actClass.getName()) {
                                 injectBaseActivityCode(actClass, fileName)
                             }
