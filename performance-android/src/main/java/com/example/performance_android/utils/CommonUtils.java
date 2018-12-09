@@ -1,7 +1,5 @@
 package com.example.performance_android.utils;
 
-import android.os.SystemClock;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

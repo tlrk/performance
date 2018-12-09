@@ -1,6 +1,5 @@
 package com.example.performance_android;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.util.SparseArray;

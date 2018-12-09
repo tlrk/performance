@@ -6,7 +6,6 @@ import android.view.Choreographer;
 
 import com.example.performance_android.HandlerThreadFactory;
 import com.example.performance_android.PerformanceMonitor;
-import com.example.performance_android.utils.LogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;

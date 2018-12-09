@@ -2,7 +2,6 @@ package com.example.performance_android.sample;
 
 
 import com.example.performance_android.model.BlockInfo;
-import com.example.performance_android.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

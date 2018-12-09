@@ -1,8 +1,5 @@
 package com.example.performance_android.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 /**
  * Created by tlrk on 8/6/18.
  */
