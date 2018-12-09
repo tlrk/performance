@@ -1,4 +1,4 @@
-package com.immomo.performance.pagespeed.bean;
+package com.tlrk.performance.pagespeed.bean;
 
 
 /**

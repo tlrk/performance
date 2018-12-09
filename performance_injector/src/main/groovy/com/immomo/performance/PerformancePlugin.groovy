@@ -1,6 +1,6 @@
-package com.immomo.performance
+package com.tlrk.performance
 
-import com.immomo.performance.extern.PerformanceExtension
+import com.tlrk.performance.extern.PerformanceExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import com.android.build.gradle.AppExtension

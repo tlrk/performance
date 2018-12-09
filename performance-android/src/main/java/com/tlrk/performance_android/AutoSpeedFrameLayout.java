@@ -1,4 +1,4 @@
-package com.tlrk.performance.pagespeed;
+package com.tlrk.performance_android;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -87,6 +87,6 @@ public class AutoSpeedFrameLayout extends FrameLayout {
     protected void dispatchDraw(Canvas canvas) {
 //        LogUtils.logD("dispatchDraw");
         super.dispatchDraw(canvas);
-        AutoSpeed.getInstance().onPageLoadedFinished(pageObjectKey);
+        AutoSpeed.getInstance().onPageDrawEnd(pageObjectKey);
     }
 }

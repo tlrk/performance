@@ -1,6 +1,6 @@
-package com.immomo.performance.pagespeed;
+package com.tlrk.performance.pagespeed;
 
-import com.immomo.framework.statistics.pagespeed.bean.PageSpeedRecord;
+import com.tlrk.framework.statistics.pagespeed.bean.PageSpeedRecord;
 
 /**
  * 获取到页面的加载时间，回调此接口

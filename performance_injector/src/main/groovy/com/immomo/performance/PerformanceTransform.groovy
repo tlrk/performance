@@ -1,4 +1,4 @@
-package com.immomo.performance
+package com.tlrk.performance
 
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager

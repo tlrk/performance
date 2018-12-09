@@ -1,4 +1,4 @@
-package com.immomo.performance.pagespeed;
+package com.tlrk.performance.pagespeed;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -6,7 +6,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.immomo.framework.statistics.pagespeed.bean.PageSpeedRecord;
+import com.tlrk.framework.statistics.pagespeed.bean.PageSpeedRecord;
 
 
 /**

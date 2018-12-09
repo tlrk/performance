@@ -1,9 +1,9 @@
-package com.immomo.performance.pagespeed;
+package com.tlrk.performance.pagespeed;
 
 
-import com.immomo.framework.statistics.pagespeed.bean.PageSpeedRecord;
-import com.immomo.mdlog.MDLog;
-import com.immomo.momo.LogTag;
+import com.tlrk.framework.statistics.pagespeed.bean.PageSpeedRecord;
+import com.tlrk.mdlog.MDLog;
+import com.tlrk.momo.LogTag;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
