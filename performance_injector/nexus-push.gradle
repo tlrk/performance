@@ -1,0 +1,29 @@
+apply plugin: 'maven'
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            // 这里仓库地址可改成自己需要的
+            repository(url: "http://192.168.1.101:8081/repository/maven-central/") {
+                // 这里的用户名和密码需要写在local.properties
+                authentication(userName: "tlrk", password: "bo958330")
+            }
+
+            pom.groupId = 'com.github.tlrk'
+            pom.artifactId = 'performance'
+            pom.version = '0.0.1'
+
+            pom.project {
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 上传到内部私服maven仓库（nexus搭建）命令：gradle uploadArchives

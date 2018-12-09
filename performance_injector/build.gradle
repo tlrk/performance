@@ -1,14 +1,24 @@
-apply plugin: 'groovy'
-apply plugin: 'maven'
+apply plugin: 'com.android.library'
 
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
 
 dependencies {
-    //gradle sdk
-    compile gradleApi()
-    //groovy sdk
-    compile localGroovy()
 
-//    compile 'org.apache.commons.io:commonsIO:2.5.0'
     compile 'com.android.tools.build:gradle:3.0.1'
     compile "org.javassist:javassist:3.21.0-GA"
 }
@@ -19,20 +29,5 @@ repositories {
 }
 //以上都为固定写法
 
-//group和version
-group='com.immomo.performance'
-version='1.0.1'
 
-//打包到本地或者远程Maven库
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            //提交到远程服务器：
-            // repository(url: "http://www.xxx.com/repos") {
-            //    authentication(userName: "admin", password: "admin")
-            // }
-            //本地的Maven地址设置为E:/Maven
-            repository(url: uri('../repo'))
-        }
-    }
-}
+apply from: './nexus-push.gradle'
