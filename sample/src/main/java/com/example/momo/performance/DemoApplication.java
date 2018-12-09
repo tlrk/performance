@@ -10,6 +10,8 @@ import com.example.performance_android.PerformanceConfig;
 import com.example.performance_android.PerformanceMonitor;
 import com.example.performance_android.appluanch.AppLaunchMonitor;
 import com.example.performance_android.utils.CommonUtils;
+import com.example.performance_android.utils.LogUtils;
+import com.facebook.device.yearclass.YearClass;
 
 /**
  * Created by momo on 8/6/18.
@@ -23,9 +25,14 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
-        Debug.startMethodTracing("performance");
         com.example.performance_android.AutoSpeed.getInstance().init(this);
         super.onCreate();
+        testYearClass();
+    }
+
+    private void testYearClass() {
+        int year = YearClass.get(getApplicationContext());
+        LogUtils.logD("year is " + year);
     }
 
     //    @Override
