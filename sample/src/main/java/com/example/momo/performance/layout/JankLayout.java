@@ -7,8 +7,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.example.performance_android.utils.CommonUtils;
-import com.example.performance_android.utils.LogUtils;
+import com.tlrk.performance.utils.CommonUtils;
+import com.tlrk.performance.utils.LogUtils;
+
 
 /**
  * 一个耗时的 layout

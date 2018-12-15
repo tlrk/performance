@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.example.momo.performance.R;
 import com.example.momo.performance.basepage.BaseAppCompatActivity;
 import com.example.momo.performance.layout.MomoViewPager;
-import com.example.performance_android.utils.LogUtils;
+import com.tlrk.performance.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

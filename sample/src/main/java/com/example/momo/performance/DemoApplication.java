@@ -2,10 +2,11 @@ package com.example.momo.performance;
 
 import android.app.Application;
 
-import com.example.performance_android.PerformanceConfig;
-import com.example.performance_android.PerformanceMonitor;
-import com.example.performance_android.utils.LogUtils;
 import com.facebook.device.yearclass.YearClass;
+import com.tlrk.performance.AutoSpeed;
+import com.tlrk.performance.PerformanceConfig;
+import com.tlrk.performance.PerformanceMonitor;
+import com.tlrk.performance.utils.LogUtils;
 
 /**
  * Created by momo on 8/6/18.
@@ -19,7 +20,7 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
-        com.example.performance_android.AutoSpeed.getInstance().init(this);
+        AutoSpeed.getInstance().init(this);
         super.onCreate();
         testYearClass();
     }

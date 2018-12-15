@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.performance_android.AutoSpeed;
-import com.example.performance_android.AutoSpeedFrameLayout;
-import com.example.performance_android.utils.CommonUtils;
+import com.tlrk.performance.AutoSpeed;
+import com.tlrk.performance.AutoSpeedFrameLayout;
+import com.tlrk.performance.utils.CommonUtils;
+
 
 /**
  * Created by momo on 8/6/18.
