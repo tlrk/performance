@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Performance-Android</string>
+    <string name="app_name">性能</string>
 
     <string name="hello_world">After click button, main-thread consuming event will be triggered, which would be caught be BlockCanary, write to log file, and use notification to display</string>
     <string name="thread_waiting">Thread\nwait\nblock</string>

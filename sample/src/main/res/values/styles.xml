@@ -11,6 +11,14 @@
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
-    <style name="ModuThreeHandsomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="launch_theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/launch_bg</item>
+    </style>
+
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 </resources>

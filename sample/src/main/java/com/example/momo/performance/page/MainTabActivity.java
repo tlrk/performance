@@ -16,6 +16,7 @@ import com.example.momo.performance.tabIndicator.AlphaTabsIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by tlrk on 8/20/18.
@@ -26,11 +27,17 @@ public class MainTabActivity extends BaseActivity {
     private AlphaTabsIndicator alphaTabsIndicator;
 
     @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initToJankActivity();
+
 
         ViewPager mViewPger = (ViewPager) findViewById(R.id.mViewPager);
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
@@ -58,6 +65,7 @@ public class MainTabActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setTheme(R.style.MyTheme);
         Debug.stopMethodTracing();
     }
 
