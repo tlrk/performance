@@ -6,11 +6,13 @@ buildscript {
 //        maven {
 //            url uri('./repo')
 //        }
+        mavenLocal()
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath ("com.geektime.systrace:systrace-gradle-plugin:1.0") { changing = true }
 
 //        classpath 'com.immomo.performance:performance_injector:1.0.1'
 

@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".page.MainTabActivity"
-                  android:theme="@style/launch_theme"
+        <activity android:name=".alpha.AlphaActivity"
+                  android:theme="@style/MyTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

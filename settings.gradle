@@ -1,1 +1,1 @@
-include ':sample', ':performance-android', ':performance-android-no-op', ':performance_injector'
+include ':sample', ':performance-android', ':performance-android-no-op', ':performance_injector', ':alpha'

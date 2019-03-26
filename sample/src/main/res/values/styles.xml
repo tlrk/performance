@@ -20,5 +20,8 @@
 
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="android:windowBackground">@drawable/pic_bg_app</item>-->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

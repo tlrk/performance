@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/alpha" />
             <option value="$PROJECT_DIR$/performance-android" />
             <option value="$PROJECT_DIR$/performance-android-no-op" />
             <option value="$PROJECT_DIR$/performance_injector" />

@@ -25,6 +25,7 @@ android {
 //}
 
 dependencies {
+    implementation project(":alpha")
     implementation project(":performance-android")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.facebook.device.yearclass:yearclass:2.1.0'
@@ -36,4 +37,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile 'com.android.support:design:26.1.0'
+}
+
+apply plugin: 'com.geektime.systrace-plugin'
+systrace {
+    enable = true
+    baseMethodMapFile = "${project.buildDir}/systrace_output/Debug.methodmap"
+    blackListFile = "${project.projectDir}/blacklist/blackMethodList.txt"
+
 }
